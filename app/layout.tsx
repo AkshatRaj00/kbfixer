@@ -10,6 +10,31 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], display: 'swap' });
 export const metadata: Metadata = {
   title: 'KBFixer - All-in-One File Size Optimizer',
   description: 'Compress, resize, and optimize Image, PDF, DOCX, and PPT files locally in your browser. 100% Secure & Fast. Powered by OnePersonAI.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  openGraph: {
+    title: 'KBFixer - All-in-One File Size Optimizer',
+    description: 'Compress & Resize Images, PDFs, DOCX & PPTs locally with 100% Privacy.',
+    url: 'https://kbfixer.onepersonai.in',
+    siteName: 'KBFixer',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 1200,
+        alt: 'KBFixer Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'KBFixer - File Size Optimizer',
+    description: 'Compress & Resize Images, PDFs, DOCX & PPTs locally.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export default function RootLayout({
