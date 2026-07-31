@@ -1,16 +1,22 @@
-// app/layout.js
+// app/layout.tsx
+import React from 'react';
+import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Send } from 'lucide-react';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], display: 'swap' });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'KBFixer - All-in-One File Size Optimizer',
   description: 'Compress, resize, and optimize Image, PDF, DOCX, and PPT files locally in your browser. 100% Secure & Fast. Powered by OnePersonAI.',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${spaceGrotesk.className} min-h-screen flex flex-col`}>
