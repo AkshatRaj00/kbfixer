@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# ⚡ KBFixer
 
-First, run the development server:
+### *Ultra-Fast, 100% In-Browser File & Image Size Optimizer*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[![Live Website](https://img.shields.io/badge/Live-kbfixer.onepersonai.in-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://kbfixer.onepersonai.in)
+[![Parent Ecosystem](https://img.shields.io/badge/Powered_By-OnePersonAI-black?style=for-the-badge)](https://onepersonai.in)
+[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg?style=for-the-badge)](LICENSE)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> **KBFixer** is an open-source, client-side web utility engineered for high-performance file compression and formatting. Built with Next.js and WebAssembly, it processes Images, PDFs, DOCX, and PPT files **100% inside your browser** without sending a single byte to external servers.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#why-kbfixer">Why KBFixer?</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#official-channels">Official Community</a> •
+  <a href="#license">License</a>
+</p>
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+</div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📌 Why KBFixer?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Most online file optimization tools upload sensitive user documents, photos, and PDFs to remote third-party servers. This poses severe data privacy risks and introduces slow processing speeds due to network bottlenecks.
 
-## Deploy on Vercel
+**KBFixer changes that paradigm completely:**
+- **🔒 Zero Data Leaks:** Files stay strictly inside your local browser runtime.
+- **⚡ Zero Latency:** Instant processing leveraging WebAssembly & Web Workers.
+- **🎓 Form & Exam Ready:** Precision resizing designed specifically for government applications, academic portals, and official submission standards.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔥 Key Features
+
+- **📸 Advanced Image Compression:** Reduce JPEG, PNG, WEBP, and AVIF sizes down to exact targets (e.g., *Compress to 20KB*, *Resize to 50KB*) without visual degradation.
+- **📄 PDF & Document Processing:** Instant PDF size reduction alongside DOCX and PPT file handling.
+- **⚙️ Client-Side Web Workers:** Heavy computation runs in background threads to keep the UI smooth at 60 FPS.
+- **🎨 Neo-Brutalist B&W Design System:** High-contrast, clean, and accessible UI crafted using Tailwind CSS and Lucide Icons.
+- **🌐 SEO & Schema Integrated:** Out-of-the-box JSON-LD structured data for fast search engine indexing and ranking.
+
+---
+
+## 🛠 Tech Stack & Architecture
+
+- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
+- **UI & Styling:** [Tailwind CSS](https://tailwindcss.com/) & Space Grotesk
+- **Core Processing:** WebAssembly (WASM), Canvas API, Web Workers
+- **Deployment Platform:** [Vercel](https://vercel.com)
+- **Engineered By:** [OnePersonAI](https://onepersonai.in)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+Make sure you have **Node.js 18+** and **npm** or **yarn** installed on your system.
+
+### Local Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/AkshatRaj00/kbfixer.git](https://github.com/AkshatRaj00/kbfixer.git)
+   cd kbfixer
