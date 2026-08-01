@@ -67,3 +67,6 @@ Make sure you have **Node.js 18+** and **npm** or **yarn** installed on your sys
    ```bash
    git clone [https://github.com/AkshatRaj00/kbfixer.git](https://github.com/AkshatRaj00/kbfixer.git)
    cd kbfixer
+Install dependencies:Bashnpm install
+Run the development server:Bashnpm run dev
+Open in browser:Navigate to http://localhost:3000 to see the app running locally.🌐 OnePersonAI Ecosystem & Live LinksMain Suite: onepersonai.inLive Utility: kbfixer.onepersonai.in📢 Official Channels & CommunityConnect with our ecosystem for feature drops, developer updates, and open-source releases:PlatformHandle / Link📢 Telegram Channel@onepersonaiofficial🎥 YouTube Channel@OnePersonAI_Official𝕏 Twitter / X@onepersonai_in📸 Instagram@onepersonaiofficial💼 LinkedIn PageOnePersonAI LinkedIn📘 Facebook PageOnePersonAI Facebook🛡 LicenseDistributed under the MIT License. See LICENSE for more information.Built with passion and technical rigor by OnePersonAI
