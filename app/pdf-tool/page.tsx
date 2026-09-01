@@ -180,7 +180,8 @@ export default function PdfInteractiveTool() {
       copiedPages.forEach((p) => newPdf.addPage(p));
 
       const pdfBytes = await newPdf.save();
-      const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const safeBuffer = new Uint8Array(pdfBytes);
+      const blob = new Blob([safeBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       setDownloadUrl(url);
@@ -215,7 +216,8 @@ export default function PdfInteractiveTool() {
       }
 
       const mergedBytes = await mergedPdf.save();
-      const blob = new Blob([mergedBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const safeBuffer = new Uint8Array(mergedBytes);
+      const blob = new Blob([safeBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       setDownloadUrl(url);
