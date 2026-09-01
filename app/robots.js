@@ -4,25 +4,49 @@ export default function robots() {
   return {
     rules: [
       {
-        // Standard Web Crawlers (Google, Bing, Yahoo, DuckDuckGo)
+        // Global crawlers rule - allow full site and assets crawling
         userAgent: '*',
-        allow: '/',
+        allow: [
+          '/',
+          '/_next/static/css/',
+          '/_next/static/chunks/',
+          '/_next/static/media/',
+        ],
         disallow: [
-          '/api/',          // Private APIs
-          '/_next/',        // Internal Next.js build files
-          '/static/',       // Static cache
+          '/api/',
+          '/admin/',
+          '/private/',
         ],
       },
       {
-        // Googlebot specific directive for deep crawling
+        // Googlebot specific directive for maximum SERP indexing
         userAgent: 'Googlebot',
         allow: '/',
         disallow: ['/api/'],
       },
       {
-        // Allow AI Crawlers (GPTBot, Perplexity, Claude) for AI Search Visibility
-        userAgent: ['GPTBot', 'ChatGPT-User', 'PerplexityBot', 'ClaudeBot'],
+        // Googlebot Image crawler for indexing tool previews & infographics
+        userAgent: 'Googlebot-Image',
         allow: '/',
+      },
+      {
+        // Bingbot directive for Bing & Yahoo search engines
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+      {
+        // Allow leading AI search engines (Perplexity, ChatGPT, Claude) for citation index
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'PerplexityBot',
+          'ClaudeBot',
+          'anthropic-ai',
+          'Applebot',
+        ],
+        allow: '/',
+        disallow: ['/api/'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

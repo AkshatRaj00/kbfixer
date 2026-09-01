@@ -1,37 +1,55 @@
-// app/sitemap.js
-export default async function sitemap() {
+export default function sitemap() {
   const baseUrl = 'https://kbfixer.onepersonai.in';
+  const currentDate = new Date().toISOString();
 
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 1.0,
     },
     {
       url: `${baseUrl}/image`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/signature`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/crop`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/pdf-tool`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/pdf`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/ppt`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/word`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/ppt`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
   ];
 }
