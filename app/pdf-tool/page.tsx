@@ -8,7 +8,6 @@ import {
   ArrowLeft,
   Upload,
   Download,
-  FileText,
   Layers,
   Scissors,
   Trash2,
@@ -17,11 +16,10 @@ import {
   CheckCircle2,
   AlertCircle,
   Eye,
-  XCircle,
 } from 'lucide-react';
 
 interface PdfPagePreview {
-  pageNumber: number; // 1-indexed
+  pageNumber: number;
   thumbnailUrl: string;
   selected: boolean;
 }
@@ -38,16 +36,13 @@ interface MergeFileItem {
 export default function PdfInteractiveTool() {
   const [mode, setMode] = useState<'split' | 'merge'>('split');
   
-  // Merge state
   const [mergeFiles, setMergeFiles] = useState<MergeFileItem[]>([]);
   
-  // Split / Visual Page Organiser state
   const [splitFile, setSplitFile] = useState<File | null>(null);
   const [splitFileName, setSplitFileName] = useState<string>('');
   const [pages, setPages] = useState<PdfPagePreview[]>([]);
   const [loadingPages, setLoadingPages] = useState<boolean>(false);
 
-  // Global processing & status
   const [processing, setProcessing] = useState<boolean>(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [outputMeta, setOutputMeta] = useState<{ name: string; sizeKb: number } | null>(null);
@@ -55,12 +50,10 @@ export default function PdfInteractiveTool() {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Setup PDF.js worker
   useEffect(() => {
     pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
   }, []);
 
-  // Helper to render a PDF page to Canvas and generate Data URL
   const renderThumbnail = async (page: any, scale: number = 0.35): Promise<string> => {
     const viewport = page.getViewport({ scale });
     const canvas = document.createElement('canvas');
@@ -75,7 +68,6 @@ export default function PdfInteractiveTool() {
     return '';
   };
 
-  // 1. Upload for Split / Page Extraction (Visual Page Grid)
   const handleSplitUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -99,7 +91,7 @@ export default function PdfInteractiveTool() {
         loadedPages.push({
           pageNumber: i,
           thumbnailUrl: thumb,
-          selected: true, // Selected by default (keep)
+          selected: true,
         });
       }
 
@@ -111,7 +103,6 @@ export default function PdfInteractiveTool() {
     }
   };
 
-  // Toggle single page inclusion in Split mode
   const togglePageSelection = (pageNumber: number) => {
     setPages((prev) =>
       prev.map((p) =>
@@ -121,13 +112,11 @@ export default function PdfInteractiveTool() {
     setDownloadUrl(null);
   };
 
-  // Select all or deselect all pages
   const setAllPagesSelection = (select: boolean) => {
     setPages((prev) => prev.map((p) => ({ ...p, selected: select })));
     setDownloadUrl(null);
   };
 
-  // 2. Upload for Merge (Visual File Cards)
   const handleMergeUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -164,13 +153,11 @@ export default function PdfInteractiveTool() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  // Remove file from merge list
   const removeMergeFile = (id: string) => {
     setMergeFiles((prev) => prev.filter((f) => f.id !== id));
     setDownloadUrl(null);
   };
 
-  // 3. Execute Split & Extraction using pdf-lib
   const executeSplitExtraction = async () => {
     if (!splitFile) return;
 
@@ -193,7 +180,7 @@ export default function PdfInteractiveTool() {
       copiedPages.forEach((p) => newPdf.addPage(p));
 
       const pdfBytes = await newPdf.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       setDownloadUrl(url);
@@ -208,7 +195,6 @@ export default function PdfInteractiveTool() {
     }
   };
 
-  // 4. Execute Merge using pdf-lib
   const executeMerge = async () => {
     if (mergeFiles.length < 2) {
       setErrorMsg('Please upload at least 2 PDF files to merge.');
@@ -229,7 +215,7 @@ export default function PdfInteractiveTool() {
       }
 
       const mergedBytes = await mergedPdf.save();
-      const blob = new Blob([mergedBytes], { type: 'application/pdf' });
+      const blob = new Blob([mergedBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       setDownloadUrl(url);
@@ -246,7 +232,6 @@ export default function PdfInteractiveTool() {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-6 sm:py-8 flex flex-col items-center">
-      {/* Top Bar */}
       <div className="w-full flex items-center justify-between mb-6">
         <Link
           href="/"
@@ -259,7 +244,6 @@ export default function PdfInteractiveTool() {
         </div>
       </div>
 
-      {/* Header */}
       <div className="text-center w-full max-w-2xl mb-6">
         <h1 className="text-2xl sm:text-4xl font-black text-black tracking-tight uppercase mb-2">
           PDF <span className="bg-black text-white px-2 py-0.5">Visual Engine</span>
@@ -269,7 +253,6 @@ export default function PdfInteractiveTool() {
         </p>
       </div>
 
-      {/* Mode Selector */}
       <div className="flex gap-2 mb-6 w-full max-w-md">
         <button
           type="button"
@@ -299,10 +282,8 @@ export default function PdfInteractiveTool() {
         </button>
       </div>
 
-      {/* Workspace */}
       <div className="w-full border-3 border-black bg-white p-4 sm:p-6 hard-shadow mb-6">
         {mode === 'split' ? (
-          /* VISUAL SPLIT / REMOVE PAGES */
           <div>
             {!splitFile ? (
               <label className="w-full flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-black p-8 hover:bg-gray-50 transition-colors">
@@ -438,7 +419,6 @@ export default function PdfInteractiveTool() {
             )}
           </div>
         ) : (
-          /* VISUAL MERGE */
           <div>
             <div className="flex items-center justify-between border-b-2 border-black pb-3 mb-4">
               <span className="text-xs font-black uppercase tracking-wider">
@@ -525,7 +505,6 @@ export default function PdfInteractiveTool() {
           </div>
         )}
 
-        {/* Error Alert */}
         {errorMsg && (
           <div className="mt-3 p-2.5 border-2 border-black bg-red-100 flex items-center gap-2 text-red-900 text-xs font-bold">
             <AlertCircle className="w-4 h-4 shrink-0 text-red-700" />
@@ -533,7 +512,6 @@ export default function PdfInteractiveTool() {
           </div>
         )}
 
-        {/* Output & Download Section */}
         {downloadUrl && outputMeta && (
           <div className="mt-4 p-3 border-2 border-black bg-green-50 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2">
@@ -556,7 +534,6 @@ export default function PdfInteractiveTool() {
         )}
       </div>
 
-      {/* Trust Badges */}
       <div className="w-full border-2 border-black bg-white p-3 flex items-center justify-between text-[11px] font-bold uppercase hard-shadow">
         <span className="flex items-center gap-1.5">
           <ShieldCheck className="w-4 h-4 text-black" /> 100% In-Browser Rendering & Manipulation
